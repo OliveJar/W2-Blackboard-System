@@ -13,6 +13,7 @@ namespace NodeCanvas.Tasks.Actions {
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
         protected override string OnInit() {
+            // Get reference to blackboard
             blackboard = agent.GetComponent<Blackboard>();
             return null;
 		}
@@ -21,10 +22,13 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			biomeLevel = Random.Range(0.0001f, 0.0011f);
+            // Determine biome level and set biome text accordingly
+            biomeLevel = Random.Range(0.0001f, 0.0011f);
+            //Set the DecreaseAmount variable in the blackboard
             blackboard.SetVariableValue("DecreaseAmount", biomeLevel);
 
-			if (biomeLevel < 0.0005f)
+            // Set biome text based on biome level
+            if (biomeLevel < 0.0005f)
             {
                 biome.text = "Desert Biome";
             }
@@ -32,7 +36,7 @@ namespace NodeCanvas.Tasks.Actions {
             {
                 biome.text = "Forest Biome";
             }
-
+            // Mark the action as finished
             EndAction();
         }
 

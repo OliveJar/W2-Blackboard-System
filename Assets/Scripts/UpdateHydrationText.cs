@@ -15,7 +15,9 @@ namespace NodeCanvas.Tasks.Actions {
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
         protected override string OnInit() {
+            // Get reference to blackboard
             blackboard = agent.GetComponent<Blackboard>();
+            // Get initial hydration level
             hydrationLevel = blackboard.GetVariableValue<float>("Hydration");
             return null;
 		}
@@ -29,7 +31,9 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-			hydrationLevel = blackboard.GetVariableValue<float>("Hydration");
+            // Get hydration level from blackboard
+            hydrationLevel = blackboard.GetVariableValue<float>("Hydration");
+            // Update hydration text
             hydrationText.text = (Mathf.RoundToInt(hydrationLevel)).ToString();
 		}
 
