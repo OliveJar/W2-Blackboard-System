@@ -23,12 +23,12 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
             // Determine biome level and set biome text accordingly
-            biomeLevel = Random.Range(0.0001f, 0.0011f);
+            biomeLevel = Random.Range(0.0001f, 0.002f);
             //Set the DecreaseAmount variable in the blackboard
             blackboard.SetVariableValue("DecreaseAmount", biomeLevel);
 
             // Set biome text based on biome level
-            if (biomeLevel < 0.0005f)
+            if (biomeLevel < 0.0015f)
             {
                 biome.text = "Desert Biome";
             }

@@ -9,7 +9,9 @@ namespace NodeCanvas.Tasks.Actions {
 	public class UpdateHydrationText : ActionTask {
 
 		Blackboard blackboard;
-		public TMPro.TextMeshProUGUI hydrationText;
+		public GameObject hydrationTextGO;
+        private TextMeshProUGUI hydrationText;
+
         float hydrationLevel;
 
         //Use for initialization. This is called only once in the lifetime of the task.
@@ -17,6 +19,10 @@ namespace NodeCanvas.Tasks.Actions {
         protected override string OnInit() {
             // Get reference to blackboard
             blackboard = agent.GetComponent<Blackboard>();
+
+			hydrationTextGO = blackboard.GetVariableValue<GameObject>("HydrationTextGO");
+            hydrationText = hydrationTextGO.GetComponent<TextMeshProUGUI>();
+
             // Get initial hydration level
             hydrationLevel = blackboard.GetVariableValue<float>("Hydration");
             return null;
@@ -35,7 +41,8 @@ namespace NodeCanvas.Tasks.Actions {
             hydrationLevel = blackboard.GetVariableValue<float>("Hydration");
             // Update hydration text
             hydrationText.text = (Mathf.RoundToInt(hydrationLevel)).ToString();
-		}
+
+        }
 
 		//Called when the task is disabled.
 		protected override void OnStop() {

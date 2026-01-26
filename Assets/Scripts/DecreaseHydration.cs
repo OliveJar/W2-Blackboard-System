@@ -36,6 +36,11 @@ namespace NodeCanvas.Tasks.Actions {
             // Decrease hydration level by decreaseAmount
             hydrationLevel -= decreaseAmount;
 
+            if (hydrationLevel > 100)
+            {
+                hydrationLevel = 100;
+            }
+
             // Update hydration level in blackboard
             blackboard.SetVariableValue("Hydration", hydrationLevel);
 
